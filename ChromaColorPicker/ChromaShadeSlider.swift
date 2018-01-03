@@ -203,6 +203,13 @@ open class ChromaShadeSlider: UIControl {
         self.delegate?.shadeSliderChoseColor(self, color: currentColor)
     }
     
+    open func setCurrentValue(value: CGFloat){
+        currentValue = value
+        handleCenterX = (((currentValue / 2)+0.5) * trackLayer.bounds.width) + (handleWidth/2)
+        
+        self.layoutHandleFrame()
+    }
+    
     /* Helper Methods */
     //Returns a CGFloat for the highest/lowest possble value such that it is inside the views bounds
     private func fittedValueInBounds(_ value: CGFloat) -> CGFloat {

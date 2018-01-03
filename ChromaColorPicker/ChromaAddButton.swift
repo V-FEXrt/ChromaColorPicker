@@ -36,11 +36,9 @@ open class ChromaAddButton: UIButton {
     override open var frame: CGRect{ //update on frame change
         didSet{
             self.layoutCircleLayer()
-            self.layoutPlusIconLayer()
         }
     }
     open var circleLayer: CAShapeLayer?
-    open var plusIconLayer: CAShapeLayer?
     
     
     override public init(frame: CGRect) {
@@ -57,18 +55,6 @@ open class ChromaAddButton: UIButton {
         self.layoutCircleLayer()
         circleLayer!.fillColor = color.cgColor
         self.layer.addSublayer(circleLayer!)
-        
-        /* Create Plus Icon */
-        let plusPath = UIBezierPath()
-        plusPath.move(to: CGPoint(x: self.bounds.width/2 - self.bounds.width/8, y: self.bounds.height/2))
-        plusPath.addLine(to: CGPoint(x: self.bounds.width/2 + self.bounds.width/8, y: self.bounds.height/2))
-        plusPath.move(to: CGPoint(x: self.bounds.width/2, y: self.bounds.height/2 + self.bounds.height/8))
-        plusPath.addLine(to: CGPoint(x: self.bounds.width/2, y: self.bounds.height/2 - self.bounds.height/8))
-        
-        plusIconLayer = CAShapeLayer()
-        self.layoutPlusIconLayer()
-        plusIconLayer!.strokeColor = UIColor.white.cgColor
-        self.layer.addSublayer(plusIconLayer!)
     }
     
     open func layoutCircleLayer(){
@@ -77,18 +63,4 @@ open class ChromaAddButton: UIButton {
             layer.lineWidth = frame.width * 0.04 //4 for size (100,100)
         }
     }
-    
-    open func layoutPlusIconLayer(){
-        if let layer = plusIconLayer{
-            let plusPath = UIBezierPath()
-            plusPath.move(to: CGPoint(x: self.bounds.width/2 - self.bounds.width/8, y: self.bounds.height/2))
-            plusPath.addLine(to: CGPoint(x: self.bounds.width/2 + self.bounds.width/8, y: self.bounds.height/2))
-            plusPath.move(to: CGPoint(x: self.bounds.width/2, y: self.bounds.height/2 + self.bounds.height/8))
-            plusPath.addLine(to: CGPoint(x: self.bounds.width/2, y: self.bounds.height/2 - self.bounds.height/8))
-            
-            layer.path = plusPath.cgPath
-            layer.lineWidth = frame.width * 0.03
-        }
-    }
-    
 }

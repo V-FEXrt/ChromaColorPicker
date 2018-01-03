@@ -36,6 +36,7 @@ open class ChromaColorPicker: UIControl {
     open var handleLine: CAShapeLayer!
     open var addButton: ChromaAddButton!
     open var colorToggleButton: ColorModeToggleButton!
+    open var shouldHideRainbowCircle = false
     
     private var modeIsGrayscale: Bool {
         return colorToggleButton.colorState == .grayscale
@@ -274,7 +275,9 @@ open class ChromaColorPicker: UIControl {
         let ctx = UIGraphicsGetCurrentContext()
         let colorSpace: ColorSpace = (modeIsGrayscale) ? .grayscale : .rainbow
         
-        drawCircleRing(in: ctx, outerRadius: radius - padding, innerRadius: radius - stroke - padding, resolution: 1, colorSpace: colorSpace)
+        if(!shouldHideRainbowCircle){
+            drawCircleRing(in: ctx, outerRadius: radius - padding, innerRadius: radius - stroke - padding, resolution: 1, colorSpace: colorSpace)
+        }
     }
     
     /*
